@@ -4,5 +4,8 @@ import "github.com/smartfood-capstone/backend/cmd"
 
 func main() {
 	cli := cmd.New()
-	cli.Execute()
+	err := cli.Execute()
+	if err != nil {
+		panic(err)
+	}
 }

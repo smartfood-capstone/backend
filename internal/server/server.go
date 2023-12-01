@@ -36,8 +36,7 @@ func New(l *logrus.Logger, cfg config.Config) Server {
 }
 
 func (s *server) Start() error {
-	addr := fmt.Sprintf(":%s", s.config.PORT)
-	s.logger.Info(addr)
+	addr := fmt.Sprintf(":%s", s.config.Port)
 	return s.app.Start(addr)
 }
 

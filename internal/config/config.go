@@ -6,13 +6,13 @@ import (
 )
 
 type Config struct {
-	PORT                 string
-	API_KEY              string
-	POSTGRES_HOST        string
-	POSTGRES_DB_NAME     string
-	POSTGRES_DB_PORT     string
-	POSTGRES_DB_USER     string
-	POSTGRES_DB_PASSWORD string
+	Port               string
+	APIKey             string
+	PostgresHost       string
+	PostgresDBName     string
+	PostgresDBPort     string
+	PostgresDBUser     string
+	PostgresDBPassword string
 }
 
 func New() Config {
@@ -32,12 +32,12 @@ func New() Config {
 	}
 
 	return Config{
-		PORT:                 v.GetString("PORT"),
-		API_KEY:              v.GetString("API_KEY"),
-		POSTGRES_HOST:        v.GetString("POSTGRES_HOST"),
-		POSTGRES_DB_NAME:     v.GetString("POSTGRES_DB_NAME"),
-		POSTGRES_DB_PORT:     v.GetString("POSTGRES_DB_PORT"),
-		POSTGRES_DB_USER:     v.GetString("POSTGRES_DB_USER"),
-		POSTGRES_DB_PASSWORD: v.GetString("POSTGRES_DB_PASSWORD"),
+		Port:               v.GetString("PORT"),
+		APIKey:             v.GetString("API_KEY"),
+		PostgresHost:       v.GetString("POSTGRES_HOST"),
+		PostgresDBName:     v.GetString("POSTGRES_DB_NAME"),
+		PostgresDBPort:     v.GetString("POSTGRES_DB_PORT"),
+		PostgresDBUser:     v.GetString("POSTGRES_DB_USER"),
+		PostgresDBPassword: v.GetString("POSTGRES_DB_PASSWORD"),
 	}
 }
