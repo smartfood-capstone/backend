@@ -5,6 +5,7 @@ install:
 	go mod tidy -v
 	go install mvdan.cc/gofumpt@latest
 	go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.55.2
+	pre-commit install
 
 format:
 	$(shell go env GOPATH)/bin/gofumpt -w .
