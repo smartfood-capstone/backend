@@ -1,15 +1,43 @@
 package app
 
-import "github.com/smartfood-capstone/backend/internal/server"
+import (
+	"fmt"
+	"runtime"
+
+	"github.com/sirupsen/logrus"
+	"github.com/smartfood-capstone/backend/internal/config"
+	"github.com/smartfood-capstone/backend/internal/server"
+)
 
 type StartCmd struct {
+	Logger *logrus.Logger
 	Server server.Server
 }
 
 func NewStartCmd() *StartCmd {
-	svr := server.New()
+	l := logrus.New()
+	cfg := config.New()
+
+	l.SetReportCaller(true)
+	l.SetFormatter(&logrus.TextFormatter{
+		CallerPrettyfier: func(f *runtime.Frame) (function string, file string) {
+			fileName := fmt.Sprintf("%s:%d", file, f.Line)
+			funcName := f.Function
+
+			return funcName, fileName
+		},
+	})
+
+	svr := server.New(l, cfg)
 
 	return &StartCmd{
 		Server: svr,
+		Logger: l,
+	}
+}
+
+func (s *StartCmd) Start() {
+	if err := s.Server.Start(); err != nil {
+		logrus.Fatal("failed to start server")
 	}
 }
