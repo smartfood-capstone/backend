@@ -3,6 +3,7 @@ package app
 import (
 	"fmt"
 	"runtime"
+	"strings"
 
 	"github.com/sirupsen/logrus"
 	"github.com/smartfood-capstone/backend/internal/config"
@@ -21,8 +22,9 @@ func NewStartCmd() *StartCmd {
 	l.SetReportCaller(true)
 	l.SetFormatter(&logrus.TextFormatter{
 		CallerPrettyfier: func(f *runtime.Frame) (function string, file string) {
-			fileName := fmt.Sprintf("%s:%d", file, f.Line)
-			funcName := f.Function
+			fileName := fmt.Sprintf("%s:%d", f.File, f.Line)
+			arrOfFunc := strings.Split(f.Function, "/")
+			funcName := arrOfFunc[len(arrOfFunc)-1]
 
 			return funcName, fileName
 		},

@@ -31,11 +31,13 @@ func New(l *logrus.Logger, cfg config.Config) Server {
 	return &server{
 		app:    app,
 		logger: l,
+		config: cfg,
 	}
 }
 
 func (s *server) Start() error {
-	addr := fmt.Sprintf(":%d", s.config.PORT)
+	addr := fmt.Sprintf(":%s", s.config.PORT)
+	s.logger.Info(addr)
 	return s.app.Start(addr)
 }
 
