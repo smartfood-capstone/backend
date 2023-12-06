@@ -20,11 +20,14 @@ RUN apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y ca-certificates
 RUN rm -rf /var/lib/apt/lists/*
 
-
+RUN mkdir -p /home/runner
+RUN groupadd -r runner && useradd -r -g runner runner
 
 COPY --from=builder /app/main .
 COPY --from=builder /app/.env .
 
 EXPOSE 8000
+
+USER runner
 
 CMD [ "./main", "start"]
