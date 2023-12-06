@@ -1,0 +1,13 @@
+services:
+  api:
+    container_name: backend
+    hostname: backend
+    env_file: .env
+    build: .
+    networks:
+      - backend
+    ports:
+      - '8000:8000'
+
+networks:
+  backend:

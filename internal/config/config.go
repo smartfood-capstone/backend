@@ -13,6 +13,7 @@ type Config struct {
 	PostgresDBPort     string
 	PostgresDBUser     string
 	PostgresDBPassword string
+	PostgresSSLMode    string
 }
 
 func New() Config {
@@ -35,9 +36,10 @@ func New() Config {
 		Port:               v.GetString("PORT"),
 		APIKey:             v.GetString("API_KEY"),
 		PostgresHost:       v.GetString("POSTGRES_HOST"),
-		PostgresDBName:     v.GetString("POSTGRES_DB_NAME"),
-		PostgresDBPort:     v.GetString("POSTGRES_DB_PORT"),
-		PostgresDBUser:     v.GetString("POSTGRES_DB_USER"),
-		PostgresDBPassword: v.GetString("POSTGRES_DB_PASSWORD"),
+		PostgresDBName:     v.GetString("POSTGRES_NAME"),
+		PostgresDBPort:     v.GetString("POSTGRES_PORT"),
+		PostgresDBUser:     v.GetString("POSTGRES_USER"),
+		PostgresDBPassword: v.GetString("POSTGRES_PASSWORD"),
+		PostgresSSLMode:    v.GetString("POSTGRES_SSL_MODE"),
 	}
 }

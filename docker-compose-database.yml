@@ -1,0 +1,8 @@
+services:
+  db:
+    container_name: database
+    image: postgres:15-alpine
+    hostname: database
+    env_file: .env
+    ports:
+      - '9999:5432'

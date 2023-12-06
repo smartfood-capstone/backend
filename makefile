@@ -20,3 +20,16 @@ lint:
 		--enable=errorlint --enable=gofumpt --enable=makezero --enable=nilerr \
 		--enable=noctx --enable=tparallel \
 		--deadline=5m --no-config
+
+docker-database:
+	docker compose -f docker-compose-database.yml up -d
+
+docker-be:
+	docker compose -f docker-compose.yml up -d --build
+
+docker-down:
+	docker compose -f docker-compose-database.yml down --volumes
+	docker compose -f docker-compose.yml down --volumes
+
+build:
+	go build -o main
