@@ -7,6 +7,7 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/sirupsen/logrus"
 	"github.com/smartfood-capstone/backend/internal/config"
+	"github.com/smartfood-capstone/backend/internal/routes"
 )
 
 type Server interface {
@@ -27,6 +28,8 @@ func New(l *logrus.Logger, cfg config.Config) Server {
 	app.Use(middleware.Recover())
 	app.Use(middleware.Logger())
 	app.Logger.SetOutput(l.Writer())
+
+	routes.InitRoutes(app)
 
 	return &server{
 		app:    app,

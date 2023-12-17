@@ -25,3 +25,6 @@ go.work
 
 # binary
 main
+
+# tmp files
+tmp
