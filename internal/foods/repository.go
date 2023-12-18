@@ -13,7 +13,7 @@ type repository struct {
 }
 
 type IRepository interface {
-	GetAll(ctx context.Context, p GetAllParams) ([]Food, error)
+	GetAll(ctx context.Context, p getAllRepoParams) ([]Food, error)
 	GetDetail(ctx context.Context, id int) (Food, error)
 	Create(ctx context.Context, f Food) (Food, error)
 	Update(ctx context.Context, f Food, id int) (Food, error)
@@ -27,14 +27,14 @@ func NewRepository(db *sqlx.DB, l *logrus.Logger) IRepository {
 	}
 }
 
-type GetAllParams struct {
+type getAllRepoParams struct {
 	Name   string
 	Limit  int
 	Offset int
 }
 
-func (r *repository) GetAll(ctx context.Context, p GetAllParams) ([]Food, error) {
-	var result []Food
+func (r *repository) GetAll(ctx context.Context, p getAllRepoParams) ([]Food, error) {
+	var result = make([]Food, 0)
 	query := `
   SELECT * FROM foods f
   WHERE "name" ilike '%' || $1 || '%'
