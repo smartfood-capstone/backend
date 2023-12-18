@@ -12,8 +12,9 @@ func HealthCheck(ctx echo.Context) error {
 	return ctx.JSON(200, util.MakeResponse(200, "OK", nil, nil))
 }
 
-func InitRoutes(s server.Server, e *echo.Echo) {
-	v1 := e.Group("/api/v1")
+func InitRoutes(s server.Server) {
+	api := s.App().Group("/api")
+	v1 := api.Group("/v1")
 
 	v1.GET("/health", HealthCheck)
 }

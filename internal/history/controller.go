@@ -14,7 +14,7 @@ type controller struct {
 	l *logrus.Logger
 }
 
-func New(l *logrus.Logger) IController {
+func NewController(l *logrus.Logger) IController {
 	return &controller{
 		l: l,
 	}

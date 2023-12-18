@@ -7,7 +7,12 @@ import (
 
 	"github.com/sirupsen/logrus"
 	"github.com/smartfood-capstone/backend/internal/config"
+	"github.com/smartfood-capstone/backend/internal/foods"
+	"github.com/smartfood-capstone/backend/internal/history"
+	"github.com/smartfood-capstone/backend/internal/predict"
+	"github.com/smartfood-capstone/backend/internal/routes"
 	"github.com/smartfood-capstone/backend/internal/server"
+	"github.com/smartfood-capstone/backend/internal/shops"
 )
 
 type StartCmd struct {
@@ -31,6 +36,19 @@ func NewStartCmd() *StartCmd {
 	})
 
 	svr := server.New(l, cfg)
+	routes.InitRoutes(svr)
+
+	foodsController := foods.NewController(l)
+	foods.RegisterRoute(svr, foodsController)
+
+	historyController := history.NewController(l)
+	history.RegisterRoute(svr, historyController)
+
+	predictController := predict.NewController(l)
+	predict.RegisterRoute(svr, predictController)
+
+	shopsController := shops.NewController(l)
+	shops.RegisterRoute(svr, shopsController)
 
 	return &StartCmd{
 		Server: svr,
