@@ -18,3 +18,4 @@ func InitRoutes(s server.Server) {
 
 	v1.GET("/health", HealthCheck)
 }
+  
