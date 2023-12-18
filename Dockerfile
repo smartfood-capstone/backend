@@ -1,4 +1,4 @@
-FROM golang:latest as builder
+FROM --platform=linux/amd64 golang:latest as builder
 
 WORKDIR /app
 
@@ -11,7 +11,7 @@ COPY . .
 
 RUN go build -o main
 
-FROM ubuntu:latest as runner
+FROM --platform=arm64 ubuntu:latest as runner
 
 WORKDIR /app
 
