@@ -24,7 +24,7 @@ RUN mkdir -p /home/runner
 RUN groupadd -r runner && useradd -r -g runner runner
 
 COPY --from=builder /app/main .
-COPY --from=builder /app/.env .
+# COPY --from=builder /app/.env .
 
 EXPOSE 8000
 ENV PORT 8000
