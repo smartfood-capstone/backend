@@ -26,7 +26,16 @@ RUN groupadd -r runner && useradd -r -g runner runner
 COPY --from=builder /app/main .
 # COPY --from=builder /app/.env .
 
-EXPOSE 8000
+ENV PORT=$PORT
+ENV API_KEY=$API_KEY
+ENV DB_HOST=$DB_HOST
+ENV DB_PORT=$DB_PORT
+ENV DB_USER=$DB_USER
+ENV DB_PASSWORD=$DB_PASSWORD
+ENV DB_NAME=$DB_NAME
+ENV DB_SSL_MODE=$DB_SSL_MODE
+
+EXPOSE $PORT
 
 USER runner
 
