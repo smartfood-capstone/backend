@@ -1,7 +1,6 @@
 package config
 
 import (
-	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 )
 
@@ -19,18 +18,18 @@ type Config struct {
 func New() Config {
 	v := viper.New()
 	v.AutomaticEnv()
-	v.SetConfigName(".env")
-	v.SetConfigType("env")
+	// v.SetConfigName(".env")
+	// v.SetConfigType("env")
 
-	v.AddConfigPath(".")
-	v.AddConfigPath("../")
-	v.AddConfigPath("../../")
-	v.AddConfigPath("../../../../")
+	// v.AddConfigPath(".")
+	// v.AddConfigPath("../")
+	// v.AddConfigPath("../../")
+	// v.AddConfigPath("../../../../")
 
-	err := v.ReadInConfig()
-	if err != nil {
-		logrus.Fatalf("error when reading config file: %s", err)
-	}
+	// err := v.ReadInConfig()
+	// if err != nil {
+	// 	logrus.Fatalf("error when reading config file: %s", err)
+	// }
 
 	return Config{
 		Port:               v.GetString("PORT"),
