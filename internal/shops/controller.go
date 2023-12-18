@@ -1,6 +1,8 @@
 package shops
 
 import (
+	"encoding/json"
+
 	"github.com/labstack/echo/v4"
 	"github.com/sirupsen/logrus"
 	"github.com/smartfood-capstone/backend/internal/util"
@@ -22,9 +24,46 @@ func NewController(l *logrus.Logger) IController {
 }
 
 func (c *controller) GetAllShops(ctx echo.Context) error {
-	return ctx.JSON(200, util.MakeResponse(200, "OK", nil, nil))
+	mockResponse := `[
+  {
+    "id": 1,
+    "name": "Shop 1",
+    "location": "Shop 1 Location",
+    "image": "https://www.google.com"
+  },
+  {
+    "id": 2,
+    "name": "Shop 1",
+    "location": "Shop 2 Location",
+    "image": "https://www.google.com"
+  }
+  ]`
+	var resp any
+	json.Unmarshal([]byte(mockResponse), &resp)
+
+	return ctx.JSON(200, util.MakeResponse(200, "OK", nil, resp))
 }
 
 func (c *controller) GetShopDetail(ctx echo.Context) error {
-	return ctx.JSON(200, util.MakeResponse(200, "OK", nil, nil))
+	mockResponse := `{
+  "id": 2,
+  "name": "Shop 1",
+  "location": "Shop 2 Location",
+  "latitude": 1.0,
+  "longitude": 1.0,
+  "image": "https://www.google.com",
+  "foods": [
+    {
+      "id": 1,
+      "name": "Food 1",
+      "price": 1.0,
+      "image": "https://www.google.com"
+    }
+  ]
+  }`
+
+	var resp any
+	json.Unmarshal([]byte(mockResponse), &resp)
+
+	return ctx.JSON(200, util.MakeResponse(200, "OK", nil, resp))
 }
