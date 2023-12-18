@@ -6,3 +6,6 @@ services:
     env_file: .env
     ports:
       - '9999:5432'
+    volumes:
+      - ./migrations/smartfood.sql:/docker-entrypoint-initdb.d/smatfood.sql
+      - ./migrations/seed.sql:/docker-entrypoint-initdb.d/seed.sq

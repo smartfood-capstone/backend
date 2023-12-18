@@ -2,6 +2,7 @@ package controller
 
 import (
 	"github.com/labstack/echo/v4"
+	"github.com/sirupsen/logrus"
 	"github.com/smartfood-capstone/backend/internal/util"
 )
 
@@ -16,13 +17,17 @@ type IController interface {
 }
 
 type controller struct {
+	l *logrus.Logger
 }
 
-func New() IController {
-	return &controller{}
+func New(l *logrus.Logger) IController {
+	return &controller{
+		l: l,
+	}
 }
 
 func (c *controller) HealthCheck(ctx echo.Context) error {
+	c.l.Errorf("error when healthcheck")
 	return ctx.JSON(200, util.MakeResponse(200, "OK", nil, nil))
 }
 

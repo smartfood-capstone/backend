@@ -26,10 +26,10 @@ func New(l *logrus.Logger, cfg config.Config) Server {
 	app := echo.New()
 	app.Use(middleware.CORS())
 	app.Use(middleware.Recover())
-	app.Use(middleware.Logger())
 	app.Logger.SetOutput(l.Writer())
+	app.Use(middleware.Logger())
 
-	routes.InitRoutes(app)
+	routes.InitRoutes(l, app)
 
 	return &server{
 		app:    app,

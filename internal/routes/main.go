@@ -4,11 +4,12 @@ package routes
 
 import (
 	"github.com/labstack/echo/v4"
+	"github.com/sirupsen/logrus"
 	"github.com/smartfood-capstone/backend/internal/controller"
 )
 
-func InitRoutes(e *echo.Echo) {
-	c := controller.New()
+func InitRoutes(l *logrus.Logger, e *echo.Echo) {
+	c := controller.New(l)
 
 	v1 := e.Group("/api/v1")
 

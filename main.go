@@ -1,17 +1,18 @@
 package main
 
 import (
+	"github.com/smartfood-capstone/backend/cmd"
 	"github.com/smartfood-capstone/backend/internal/app"
 )
 
 func main() {
-	// cli := cmd.New()
-	// err := cli.Execute()
+	cli := cmd.New()
+	err := cli.Execute()
 
 	cmd := app.NewStartCmd()
 	cmd.Start()
 
-	// if err != nil {
-	// 	panic(err)
-	// }
+	if err != nil {
+		panic(err)
+	}
 }

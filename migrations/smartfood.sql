@@ -1,5 +1,5 @@
 CREATE TABLE "users" (
-  "id" SERIAL PRIMARY KEY,
+  "id" VARCHAR NOT NULL,
   "name" text,
   "created_at" timestamp
 );
@@ -38,4 +38,3 @@ ALTER TABLE "shop_foods"
 ADD FOREIGN KEY ("food_id") REFERENCES "foods" ("id");
 ALTER TABLE "detection_history"
 ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
-
