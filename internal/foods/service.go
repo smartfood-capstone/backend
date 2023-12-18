@@ -11,7 +11,13 @@ type service struct {
 	l *logrus.Logger
 }
 
-type IService interface{}
+type IService interface {
+	GetAll(ctx context.Context, p getAllRepoParams) ([]Food, error)
+	GetDetail(ctx context.Context, id int) (Food, error)
+	Create(ctx context.Context, f Food) (Food, error)
+	Update(ctx context.Context, f Food, id int) (Food, error)
+	Delete(ctx context.Context, id int) (Food, error)
+}
 
 func NewService(r IRepository, l *logrus.Logger) IService {
 	return &service{
@@ -20,26 +26,11 @@ func NewService(r IRepository, l *logrus.Logger) IService {
 	}
 }
 
-type getAllServiceParams struct {
-	Name  string
-	Limit int
-	Page  int
-}
-
-func (s *service) GetAll(ctx context.Context, p getAllServiceParams) ([]Food, error) {
+func (s *service) GetAll(ctx context.Context, p getAllRepoParams) ([]Food, error) {
 	var result = make([]Food, 0)
-
-	offset := (p.Page - 1) * 20
-
-	params := getAllRepoParams{
-		Name:   p.Name,
-		Limit:  p.Limit,
-		Offset: offset,
-	}
-
-	result, err := s.r.GetAll(ctx, params)
+	result, err := s.r.GetAll(ctx, p)
 	if err != nil {
-		s.l.Errorf("error when getting all foods, name: %s, limit: %d, page: %d, err: %s", p.Name, p.Limit, p.Page, err)
+		s.l.Errorf("error when getting all foods, name: %s, limit: %d, offset: %d, err: %s", p.Name, p.Limit, p.Offset, err)
 		return result, err
 	}
 

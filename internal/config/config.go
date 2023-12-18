@@ -36,7 +36,7 @@ func New() Config {
 		Port:               v.GetString("PORT"),
 		APIKey:             v.GetString("API_KEY"),
 		PostgresHost:       v.GetString("POSTGRES_HOST"),
-		PostgresDBName:     v.GetString("POSTGRES_NAME"),
+		PostgresDBName:     v.GetString("POSTGRES_DB"),
 		PostgresDBPort:     v.GetString("POSTGRES_PORT"),
 		PostgresDBUser:     v.GetString("POSTGRES_USER"),
 		PostgresDBPassword: v.GetString("POSTGRES_PASSWORD"),

@@ -7,6 +7,7 @@ import (
 
 	"github.com/sirupsen/logrus"
 	"github.com/smartfood-capstone/backend/internal/config"
+	"github.com/smartfood-capstone/backend/internal/database"
 	"github.com/smartfood-capstone/backend/internal/foods"
 	"github.com/smartfood-capstone/backend/internal/history"
 	"github.com/smartfood-capstone/backend/internal/predict"
@@ -23,6 +24,7 @@ type StartCmd struct {
 func NewStartCmd() *StartCmd {
 	l := logrus.New()
 	cfg := config.New()
+	db := database.New(cfg)
 
 	l.SetReportCaller(true)
 	l.SetFormatter(&logrus.TextFormatter{
@@ -38,7 +40,9 @@ func NewStartCmd() *StartCmd {
 	svr := server.New(l, cfg)
 	routes.InitRoutes(svr)
 
-	foodsController := foods.NewController(l)
+	foodsRepository := foods.NewRepository(db, l)
+	foodsService := foods.NewService(foodsRepository, l)
+	foodsController := foods.NewController(foodsService, l)
 	foods.RegisterRoute(svr, foodsController)
 
 	historyController := history.NewController(l)
