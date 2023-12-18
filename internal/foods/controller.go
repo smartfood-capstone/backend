@@ -32,15 +32,15 @@ func NewController(s IService, l *logrus.Logger) IController {
 
 type requestCreate struct {
 	Name        string `json:"name" validate:"required,printascii"`
-	Description string `json:"Description" validate:"required,printascii"`
-	Category    string `json:"Category" validate:"required,printascii"`
+	Description string `json:"description" validate:"required,printascii"`
+	Category    string `json:"category" validate:"required,printascii"`
 	Image       string `json:"image" validate:"required,url"`
 }
 
 type requestUpdate struct {
 	Name        string `json:"name" validate:"omitempty,printascii"`
-	Description string `json:"Description" validate:"omitempty,printascii"`
-	Category    string `json:"Category" validate:"omitempty,printascii"`
+	Description string `json:"description" validate:"omitempty,printascii"`
+	Category    string `json:"category" validate:"omitempty,printascii"`
 	Image       string `json:"image" validate:"omitempty,url"`
 }
 
@@ -80,7 +80,7 @@ func (c *controller) GetAll(ctx echo.Context) error {
 	resp, err := c.s.GetAll(controllerContext, params)
 	if err != nil {
 		c.l.Errorf("error when getting data from service err: %s", err)
-		ctx.JSON(http.StatusBadRequest, util.MakeResponse(http.StatusBadRequest, "error when fetching data", err, nil))
+		return ctx.JSON(http.StatusBadRequest, util.MakeResponse(http.StatusBadRequest, "error when fetching data", err, nil))
 	}
 
 	return ctx.JSON(http.StatusOK, util.MakeResponse(http.StatusOK, "OK", nil, resp))
@@ -132,7 +132,7 @@ func (c *controller) Create(ctx echo.Context) error {
 	resp, err := c.s.Create(controllerContext, food)
 	if err != nil {
 		c.l.Errorf("error when creating data from service err: %s", err)
-		ctx.JSON(http.StatusBadRequest, util.MakeResponse(http.StatusBadRequest, "error creating data from service", err, nil))
+		return ctx.JSON(http.StatusBadRequest, util.MakeResponse(http.StatusBadRequest, "error creating data from service", err, nil))
 	}
 
 	return ctx.JSON(http.StatusCreated, util.MakeResponse(http.StatusCreated, "OK", nil, resp))
@@ -161,7 +161,7 @@ func (c *controller) Update(ctx echo.Context) error {
 		return ctx.JSON(http.StatusBadRequest, util.MakeResponse(http.StatusBadRequest, "error when validating body", err, nil))
 	}
 
-	if !req.checkEmpty() {
+	if req.checkEmpty() {
 		c.l.Error("request body cannot be empty")
 		return ctx.JSON(http.StatusBadRequest, util.MakeResponse(http.StatusBadRequest, "request body cannot be empty", err, nil))
 
@@ -177,7 +177,7 @@ func (c *controller) Update(ctx echo.Context) error {
 	resp, err := c.s.Update(controllerContext, food, id)
 	if err != nil {
 		c.l.Errorf("error when update data from service id: %d, err: %s", id, err)
-		ctx.JSON(http.StatusBadRequest, util.MakeResponse(http.StatusBadRequest, "error update data from service", err, nil))
+		return ctx.JSON(http.StatusBadRequest, util.MakeResponse(http.StatusBadRequest, "error update data from service", err, nil))
 	}
 
 	return ctx.JSON(http.StatusOK, util.MakeResponse(http.StatusOK, "OK", nil, resp))
@@ -196,7 +196,7 @@ func (c *controller) Delete(ctx echo.Context) error {
 	resp, err := c.s.Delete(controllerContext, id)
 	if err != nil {
 		c.l.Errorf("error when deleting data from service id: %d, err: %s", id, err)
-		ctx.JSON(http.StatusBadRequest, util.MakeResponse(http.StatusBadRequest, "error deleting data from service", err, nil))
+		return ctx.JSON(http.StatusBadRequest, util.MakeResponse(http.StatusBadRequest, "error deleting data from service", err, nil))
 	}
 
 	return ctx.JSON(http.StatusOK, util.MakeResponse(http.StatusOK, "OK", nil, resp))

@@ -74,7 +74,7 @@ func (r *repository) Create(ctx context.Context, f Food) (Food, error) {
     RETURNING *
   `
 
-	err := r.db.GetContext(ctx, &result, query)
+	err := r.db.GetContext(ctx, &result, query, f.Name, f.Description, f.Category, f.Image)
 	if err != nil {
 		r.l.Errorf("error when creating database, name: %s, desc: %s, category: %s, image: %s, err: %s", f.Name, f.Description, f.Category, f.Image, err)
 		return result, err
