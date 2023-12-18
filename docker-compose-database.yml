@@ -7,5 +7,5 @@ services:
     ports:
       - '9999:5432'
     volumes:
-      - ./migrations/smartfood.sql:/docker-entrypoint-initdb.d/smatfood.sql
-      - ./migrations/seed.sql:/docker-entrypoint-initdb.d/seed.sq
+      - ./migrations/smartfood.sql:/docker-entrypoint-initdb.d/smartfood.sql
+      # - ./migrations/seed.sql:/docker-entrypoint-initdb.d/seed.sql

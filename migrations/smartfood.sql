@@ -1,5 +1,5 @@
 CREATE TABLE "users" (
-  "id" VARCHAR NOT NULL,
+  "id" VARCHAR NOT NULL PRIMARY KEY,
   "name" text,
   "created_at" timestamp
 );

@@ -30,13 +30,13 @@ func (c *controller) GetAllFoods(ctx echo.Context) error {
     {"id": 1,
     "name": "Burger",
     "description": "A burger",
-    "image": "google.com"
+    "image": "https://placehold.co/600x400"
     },
     {
     "id": 2,
     "name": "Burger 2",
     "description": "A burger",
-    "image": "google.com"}
+    "image": "https://placehold.co/600x400"}
   ]`
 
 	var resp any
@@ -51,7 +51,7 @@ func (c *controller) GetFoodDetail(ctx echo.Context) error {
     "id": 1,
     "name": "Burger",
     "description": "A burger",
-    "image": "google.com",
+    "image": "https://placehold.co/600x400",
     "shops": [
       {
         "id": 1,

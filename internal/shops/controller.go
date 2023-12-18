@@ -29,13 +29,13 @@ func (c *controller) GetAllShops(ctx echo.Context) error {
     "id": 1,
     "name": "Shop 1",
     "location": "Shop 1 Location",
-    "image": "https://www.google.com"
+    "image": "https://placehold.co/600x400"
   },
   {
     "id": 2,
     "name": "Shop 1",
     "location": "Shop 2 Location",
-    "image": "https://www.google.com"
+    "image": "https://placehold.co/600x400"
   }
   ]`
 	var resp any
@@ -46,20 +46,20 @@ func (c *controller) GetAllShops(ctx echo.Context) error {
 
 func (c *controller) GetShopDetail(ctx echo.Context) error {
 	mockResponse := `{
-  "id": 2,
-  "name": "Shop 1",
-  "location": "Shop 2 Location",
-  "latitude": 1.0,
-  "longitude": 1.0,
-  "image": "https://www.google.com",
-  "foods": [
-    {
-      "id": 1,
-      "name": "Food 1",
-      "price": 1.0,
-      "image": "https://www.google.com"
-    }
-  ]
+    "id": 2,
+    "name": "Shop 1",
+    "location": "Shop 2 Location",
+    "latitude": 1.0,
+    "longitude": 1.0,
+    "image": "https://placehold.co/600x400",
+    "foods": [
+      {i
+        "id": 1,
+        "name": "Food 1",
+        "price": 1.0,
+        "image": "https://placehold.co/600x400"
+      }
+    ]
   }`
 
 	var resp any
