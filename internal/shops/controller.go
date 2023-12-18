@@ -53,7 +53,7 @@ func (c *controller) GetShopDetail(ctx echo.Context) error {
     "longitude": 1.0,
     "image": "https://placehold.co/600x400",
     "foods": [
-      {i
+      {
         "id": 1,
         "name": "Food 1",
         "price": 1.0,
