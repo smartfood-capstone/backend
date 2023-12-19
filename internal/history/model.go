@@ -1,6 +1,10 @@
 package history
 
 type History struct {
-	Id     string `json:"id" db:"id"`
-	Result string `json:"result" db:"result"`
+	Id          string `json:"id" db:"id"`
+	Name        string `json:"name" db:"name"`
+	Category    string `json:"category" db:"category"`
+	CreatedAt   string `json:"created_at" db:"created_at"`
+	Description string `json:"description" db:"description"`
+	Image       string `json:"image" db:"image"`
 }

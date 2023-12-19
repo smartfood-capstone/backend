@@ -45,7 +45,9 @@ func NewStartCmd() *StartCmd {
 	foodsController := foods.NewController(foodsService, l)
 	foods.RegisterRoute(svr, foodsController)
 
-	historyController := history.NewController(l)
+	historyRepository := history.NewRepository(db, l)
+	historyService := history.NewService(historyRepository, l)
+	historyController := history.NewController(l, historyService)
 	history.RegisterRoute(svr, historyController)
 
 	predictRepository := predict.NewRepository(db, l)
