@@ -13,6 +13,7 @@ type Config struct {
 	PostgresDBUser     string
 	PostgresDBPassword string
 	PostgresSSLMode    string
+	MLHost             string
 }
 
 func New() Config {
@@ -40,5 +41,6 @@ func New() Config {
 		PostgresDBUser:     v.GetString("POSTGRES_USER"),
 		PostgresDBPassword: v.GetString("POSTGRES_PASSWORD"),
 		PostgresSSLMode:    v.GetString("POSTGRES_SSL_MODE"),
+		MLHost:             v.GetString("ML_HOST"),
 	}
 }
