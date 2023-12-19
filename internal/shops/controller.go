@@ -29,37 +29,37 @@ func (c *controller) GetAllShops(ctx echo.Context) error {
       "id": 1,
       "name": "Shop 1",
       "location": "Shop 1 Location",
-      "image": "https://placehold.co/600x400"
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGifwJSVbCfdxshbcC8_eyCWbiXucVwjSUPiQg5Ldpxg&s"
     },
     {
       "id": 2,
       "name": "Shop 1",
       "location": "Shop 2 Location",
-      "image": "https://placehold.co/600x400"
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGifwJSVbCfdxshbcC8_eyCWbiXucVwjSUPiQg5Ldpxg&s"
     },
     {
       "id": 3,
       "name": "Shop 1",
       "location": "Shop 1 Location",
-      "image": "https://placehold.co/600x400"
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGifwJSVbCfdxshbcC8_eyCWbiXucVwjSUPiQg5Ldpxg&s"
     },
     {
       "id": 4,
       "name": "Shop 1",
       "location": "Shop 2 Location",
-      "image": "https://placehold.co/600x400"
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGifwJSVbCfdxshbcC8_eyCWbiXucVwjSUPiQg5Ldpxg&s"
     },
     {
       "id": 5,
       "name": "Shop 1",
       "location": "Shop 1 Location",
-      "image": "https://placehold.co/600x400"
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGifwJSVbCfdxshbcC8_eyCWbiXucVwjSUPiQg5Ldpxg&s"
     },
     {
       "id": 6,
       "name": "Shop 1",
       "location": "Shop 2 Location",
-      "image": "https://placehold.co/600x400"
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGifwJSVbCfdxshbcC8_eyCWbiXucVwjSUPiQg5Ldpxg&s"
     }
   ]`
 	var resp any
@@ -75,13 +75,13 @@ func (c *controller) GetShopDetail(ctx echo.Context) error {
     "location": "Shop 2 Location",
     "latitude": 1.0,
     "longitude": 1.0,
-    "image": "https://placehold.co/600x400",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGifwJSVbCfdxshbcC8_eyCWbiXucVwjSUPiQg5Ldpxg&s",
     "foods": [
       {
         "id": 1,
         "name": "Food 1",
         "price": 1.0,
-        "image": "https://placehold.co/600x400"
+        "image": "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg"
       }
     ]
   }`
