@@ -47,7 +47,7 @@ from
 	detection_history dh
 inner join foods f on dh."result"->>'data' = f.category WHERE user_id = $1 ORDER BY created_at DESC LIMIT $2 OFFSET $3`
 
-	var result = make([]History, 0)
+	result := make([]History, 0)
 	// For now user_id is hardcoded to 1
 	res, err := tx.QueryContext(ctx, query, "1", param.Limit, param.Offset)
 	if err != nil {

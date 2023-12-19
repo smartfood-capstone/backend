@@ -84,7 +84,6 @@ func (c *controller) GetAll(ctx echo.Context) error {
 	}
 
 	return ctx.JSON(http.StatusOK, util.MakeResponse(http.StatusOK, "OK", nil, resp))
-
 }
 
 func (c *controller) GetDetail(ctx echo.Context) error {

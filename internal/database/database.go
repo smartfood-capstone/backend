@@ -10,7 +10,6 @@ import (
 )
 
 func New(cfg config.Config) *sqlx.DB {
-
 	log.Println(cfg)
 	connURL := fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=%s", cfg.PostgresDBUser, cfg.PostgresDBPassword, cfg.PostgresHost, cfg.PostgresDBPort, cfg.PostgresDBName, cfg.PostgresSSLMode)
 	db, err := sqlx.Connect("postgres", connURL)

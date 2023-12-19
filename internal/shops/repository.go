@@ -34,7 +34,7 @@ type getAllRepoParams struct {
 }
 
 func (r *repository) GetAll(ctx context.Context, p getAllRepoParams) ([]Shop, error) {
-	var result = make([]Shop, 0)
+	result := make([]Shop, 0)
 	query := `
   SELECT * FROM shops s
   WHERE "name" ilike '%' || $1 || '%'
@@ -70,7 +70,7 @@ func (r *repository) Create(ctx context.Context, s Shop) (Shop, error) {
 	var result Shop
 	query := `
     INSERT INTO "shops" (name, location, gmaps_link, latitude, longitude, image)
-    VALUES ($1,$2,$3,$4,$5,$6) 
+    VALUES ($1,$2,$3,$4,$5,$6)
     RETURNING *
   `
 
@@ -86,7 +86,6 @@ func (r *repository) Create(ctx context.Context, s Shop) (Shop, error) {
 func (r *repository) Update(ctx context.Context, s Shop, id int) (Shop, error) {
 	var result Shop
 	existingShop, err := r.GetDetail(ctx, id)
-
 	if err != nil {
 		r.l.Errorf("error when getting id from database, id: %d, err: %s", id, err)
 		return result, err
@@ -117,7 +116,7 @@ func (r *repository) Update(ctx context.Context, s Shop, id int) (Shop, error) {
 	}
 
 	query := `
-    UPDATE shops 
+    UPDATE shops
     SET "name" = $1, location = $2, gmaps_link = $3, latitude = $4, longitude = $5, image = $6
     WHERE id = $7
     RETURNING *
@@ -136,7 +135,6 @@ func (r *repository) Update(ctx context.Context, s Shop, id int) (Shop, error) {
 func (r *repository) Delete(ctx context.Context, id int) (Shop, error) {
 	var result Shop
 	_, err := r.GetDetail(ctx, id)
-
 	if err != nil {
 		r.l.Errorf("error when getting id from database, id: %d, err: %s", id, err)
 		return result, err

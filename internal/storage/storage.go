@@ -1,7 +1,6 @@
 package storage
 
-type Storage struct {
-}
+type Storage struct{}
 
 func New() *Storage {
 	return &Storage{}

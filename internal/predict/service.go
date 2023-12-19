@@ -31,7 +31,6 @@ func NewService(r IRepository, l *logrus.Logger) IService {
 }
 
 func (s *service) DetectFoodUsingExternal(ctx echo.Context) (PredictResponse, error) {
-
 	file, fileHeader, err := ctx.Request().FormFile("file")
 	if err != nil {
 		return PredictResponse{}, err

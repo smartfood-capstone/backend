@@ -34,7 +34,7 @@ type getAllRepoParams struct {
 }
 
 func (r *repository) GetAll(ctx context.Context, p getAllRepoParams) ([]Food, error) {
-	var result = make([]Food, 0)
+	result := make([]Food, 0)
 	query := `
   SELECT * FROM foods f
   WHERE "name" ilike '%' || $1 || '%'
@@ -86,7 +86,6 @@ func (r *repository) Create(ctx context.Context, f Food) (Food, error) {
 func (r *repository) Update(ctx context.Context, f Food, id int) (Food, error) {
 	var result Food
 	existingFood, err := r.GetDetail(ctx, id)
-
 	if err != nil {
 		r.l.Errorf("error when getting id from database, id: %d, err: %s", id, err)
 		return result, err
@@ -128,7 +127,6 @@ func (r *repository) Update(ctx context.Context, f Food, id int) (Food, error) {
 func (r *repository) Delete(ctx context.Context, id int) (Food, error) {
 	var result Food
 	_, err := r.GetDetail(ctx, id)
-
 	if err != nil {
 		r.l.Errorf("error when getting id from database, id: %d, err: %s", id, err)
 		return result, err

@@ -23,7 +23,7 @@ func NewService(r IRepository, l *logrus.Logger) IService {
 }
 
 func (s *service) GetAll(ctx context.Context, p getAllParams) ([]History, error) {
-	var result = make([]History, 0)
+	result := make([]History, 0)
 	result, err := s.r.GetAllHistory(ctx, p)
 	if err != nil {
 		s.l.Errorf("error when getting all history, limit: %d, offset: %d, err: %s", p.Limit, p.Offset, err)

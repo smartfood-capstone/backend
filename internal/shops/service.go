@@ -27,7 +27,7 @@ func NewService(r IRepository, l *logrus.Logger) IService {
 }
 
 func (s *service) GetAll(ctx context.Context, p getAllRepoParams) ([]Shop, error) {
-	var result = make([]Shop, 0)
+	result := make([]Shop, 0)
 	result, err := s.r.GetAll(ctx, p)
 	if err != nil {
 		s.l.Errorf("error when getting all Shops, name: %s, limit: %d, offset: %d, err: %s", p.Name, p.Limit, p.Offset, err)
