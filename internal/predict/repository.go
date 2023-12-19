@@ -6,6 +6,7 @@ import (
 
 	"github.com/jmoiron/sqlx"
 	"github.com/sirupsen/logrus"
+	"github.com/smartfood-capstone/backend/internal/foods"
 	"github.com/smartfood-capstone/backend/internal/util"
 )
 
@@ -16,6 +17,7 @@ type repository struct {
 
 type IRepository interface {
 	InsertHistory(ctx context.Context, history History) error
+	GetFoodDetailByCategory(ctx context.Context, category string) (foods.Food, error)
 }
 
 func NewRepository(db *sqlx.DB, l *logrus.Logger) IRepository {
@@ -49,4 +51,20 @@ func (r *repository) InsertHistory(ctx context.Context, history History) error {
 
 	defer util.CommitOrRollback(tx)
 	return nil
+}
+
+func (r *repository) GetFoodDetailByCategory(ctx context.Context, category string) (foods.Food, error) {
+	var result foods.Food
+	query := `
+    SELECT * FROM foods f
+    WHERE category = $1
+  `
+
+	err := r.db.GetContext(ctx, &result, query, category)
+	if err != nil {
+		r.l.Errorf("error when getting detail id: %s, err: %s", category, err)
+		return result, err
+	}
+
+	return result, nil
 }

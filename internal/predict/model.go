@@ -10,7 +10,10 @@ type Predict struct {
 }
 
 type PredictResponse struct {
-	Category string `json:"category"`
+	Category    string `json:"category"`
+	Name        string `json:"name"`
+	Description string `json:"description"`
+	Image       string `json:"image"`
 }
 
 type History struct {

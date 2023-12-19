@@ -3,7 +3,6 @@ package predict
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"io"
 	"mime/multipart"
 	"net/http"
@@ -77,13 +76,9 @@ func (s *service) DetectFoodUsingExternal(ctx echo.Context) (PredictResponse, er
 	var respBody any
 	err = json.NewDecoder(resp.Body).Decode(&respBody)
 
-	fmt.Println(respBody)
-
 	if err != nil {
 		return PredictResponse{}, err
 	}
-
-	logrus.Println(respBody)
 
 	reqValue := reflect.ValueOf(respBody)
 	Category := reqValue.MapIndex(reflect.ValueOf("data")).Interface().(string)
@@ -97,6 +92,20 @@ func (s *service) DetectFoodUsingExternal(ctx echo.Context) (PredictResponse, er
 	}
 
 	err = s.r.InsertHistory(ctx.Request().Context(), history)
+	if err != nil {
+		return PredictResponse{}, err
+	}
 
-	return PredictResponse{Category}, nil
+	food, err := s.r.GetFoodDetailByCategory(ctx.Request().Context(), Category)
+	if err != nil {
+		return PredictResponse{}, err
+	}
+	response := PredictResponse{
+		Category:    food.Category,
+		Name:        food.Name,
+		Description: food.Description,
+		Image:       food.Image,
+	}
+
+	return response, nil
 }
