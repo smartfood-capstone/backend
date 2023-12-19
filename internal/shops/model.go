@@ -1,7 +1,7 @@
 package shops
 
 type Shop struct {
-	Id        int     `json:"id" db:"db"`
+	Id        int     `json:"id" db:"id"`
 	Name      string  `json:"name" db:"name"`
 	Location  string  `json:"location" db:"location"`
 	GmapsLink string  `json:"gmaps_link" db:"gmaps_link"`

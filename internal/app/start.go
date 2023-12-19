@@ -55,7 +55,9 @@ func NewStartCmd() *StartCmd {
 	predictController := predict.NewController(predictService, l)
 	predict.RegisterRoute(svr, predictController)
 
-	shopsController := shops.NewController(l)
+	shopsRepository := shops.NewRepository(db, l)
+	shopsService := shops.NewService(shopsRepository, l)
+	shopsController := shops.NewController(shopsService, l)
 	shops.RegisterRoute(svr, shopsController)
 
 	return &StartCmd{
