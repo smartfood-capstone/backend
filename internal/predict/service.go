@@ -7,6 +7,8 @@ import (
 	"io"
 	"mime/multipart"
 	"net/http"
+	"reflect"
+	"strings"
 
 	"github.com/labstack/echo/v4"
 	"github.com/sirupsen/logrus"
@@ -36,6 +38,8 @@ func (s *service) DetectFoodUsingExternal(ctx echo.Context) (PredictResponse, er
 		return PredictResponse{}, err
 	}
 
+	predictType := strings.ToUpper(ctx.Request().FormValue("type"))
+
 	var requestBody bytes.Buffer
 	multipartWriter := multipart.NewWriter(&requestBody)
 	fileWriter, err := multipartWriter.CreateFormFile("file", fileHeader.Filename)
@@ -48,6 +52,8 @@ func (s *service) DetectFoodUsingExternal(ctx echo.Context) (PredictResponse, er
 	if err != nil {
 		return PredictResponse{}, err
 	}
+
+	multipartWriter.WriteField("type", predictType)
 
 	multipartWriter.Close()
 
@@ -79,5 +85,18 @@ func (s *service) DetectFoodUsingExternal(ctx echo.Context) (PredictResponse, er
 
 	logrus.Println(respBody)
 
-	return PredictResponse{}, nil
+	reqValue := reflect.ValueOf(respBody)
+	Category := reqValue.MapIndex(reflect.ValueOf("data")).Interface().(string)
+
+	history := History{
+		// Hardcoded for now, no user login yet
+		UserId: "1",
+		Result: Result{
+			Data: Category,
+		},
+	}
+
+	err = s.r.InsertHistory(ctx.Request().Context(), history)
+
+	return PredictResponse{Category}, nil
 }

@@ -1,6 +1,8 @@
 package predict
 
 import (
+	"strings"
+
 	"github.com/labstack/echo/v4"
 	"github.com/sirupsen/logrus"
 	"github.com/smartfood-capstone/backend/internal/util"
@@ -23,7 +25,6 @@ func NewController(s IService, l *logrus.Logger) IController {
 }
 
 func (c *controller) DetectFood(ctx echo.Context) error {
-
 	// Limit upload size to 32 MB
 	err := ctx.Request().ParseMultipartForm(32 << 20)
 	if err != nil {
@@ -35,6 +36,13 @@ func (c *controller) DetectFood(ctx echo.Context) error {
 		return ctx.JSON(400, util.MakeResponse(400, "Bad Request", err, nil))
 	}
 
+	predictType := ctx.Request().FormValue("type")
+	predictType = strings.ToUpper(predictType)
+	if predictType != "JAJANAN" && predictType != "MAKANAN" {
+		// For now we will just assume that the user wants to predict food if the type is not specified
+		predictType = "MAKANAN"
+	}
+
 	defer file.Close()
 
 	resp, err := c.s.DetectFoodUsingExternal(ctx)
@@ -42,14 +50,5 @@ func (c *controller) DetectFood(ctx echo.Context) error {
 		return ctx.JSON(500, util.MakeResponse(500, "Internal Server Error", err, nil))
 	}
 
-	// mockResponse := `{
-	// "id": 1,
-	// "name": "Burger",
-	// "category": "bakso",
-	// "created_at": "2023-01-01 10:00:00",
-	// "description": "A burger",
-	// "image": "https://placehold.co/600x400"}`
-	// var resp any
-	// json.Unmarshal([]byte(mockResponse), &resp)
-	return ctx.JSON(200, util.MakeResponse(200, "OK", nil, resp))
+	return ctx.JSON(200, util.MakeResponse(200, "Predict success", nil, resp))
 }

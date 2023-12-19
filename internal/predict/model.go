@@ -12,3 +12,14 @@ type Predict struct {
 type PredictResponse struct {
 	Category string `json:"category"`
 }
+
+type History struct {
+	Id        string `json:"id" db:"id"`
+	CreatedAt string `json:"created_at" db:"created_at"`
+	Result    `json:"result"`
+	UserId    string `json:"user_id"`
+}
+
+type Result struct {
+	Data string `json:"data"`
+}
