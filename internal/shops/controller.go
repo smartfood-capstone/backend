@@ -25,18 +25,42 @@ func NewController(l *logrus.Logger) IController {
 
 func (c *controller) GetAllShops(ctx echo.Context) error {
 	mockResponse := `[
-  {
-    "id": 1,
-    "name": "Shop 1",
-    "location": "Shop 1 Location",
-    "image": "https://placehold.co/600x400"
-  },
-  {
-    "id": 2,
-    "name": "Shop 1",
-    "location": "Shop 2 Location",
-    "image": "https://placehold.co/600x400"
-  }
+    {
+      "id": 1,
+      "name": "Shop 1",
+      "location": "Shop 1 Location",
+      "image": "https://placehold.co/600x400"
+    },
+    {
+      "id": 2,
+      "name": "Shop 1",
+      "location": "Shop 2 Location",
+      "image": "https://placehold.co/600x400"
+    },
+    {
+      "id": 3,
+      "name": "Shop 1",
+      "location": "Shop 1 Location",
+      "image": "https://placehold.co/600x400"
+    },
+    {
+      "id": 4,
+      "name": "Shop 1",
+      "location": "Shop 2 Location",
+      "image": "https://placehold.co/600x400"
+    },
+    {
+      "id": 5,
+      "name": "Shop 1",
+      "location": "Shop 1 Location",
+      "image": "https://placehold.co/600x400"
+    },
+    {
+      "id": 6,
+      "name": "Shop 1",
+      "location": "Shop 2 Location",
+      "image": "https://placehold.co/600x400"
+    }
   ]`
 	var resp any
 	json.Unmarshal([]byte(mockResponse), &resp)
