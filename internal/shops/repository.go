@@ -18,6 +18,7 @@ type IRepository interface {
 	Create(ctx context.Context, f Shop) (Shop, error)
 	Update(ctx context.Context, f Shop, id int) (Shop, error)
 	Delete(ctx context.Context, id int) (Shop, error)
+	GetFoodsByShopId(ctx context.Context, id string) ([]FoodShop, error)
 }
 
 func NewRepository(db *sqlx.DB, l *logrus.Logger) IRepository {
@@ -149,6 +150,23 @@ func (r *repository) Delete(ctx context.Context, id int) (Shop, error) {
 	err = r.db.GetContext(ctx, &result, query, id)
 	if err != nil {
 		r.l.Errorf("error when deleting database id: %d, err: %s", id, err)
+		return result, err
+	}
+
+	return result, nil
+}
+
+func (r *repository) GetFoodsByShopId(ctx context.Context, id string) ([]FoodShop, error) {
+	result := make([]FoodShop, 0)
+	query := `
+	SELECT f.id, f.name, fs.price FROM foods f
+	INNER JOIN shop_foods fs ON f.id = fs.food_id
+	WHERE fs.shop_id = $1
+	`
+
+	err := r.db.SelectContext(ctx, &result, query, id)
+	if err != nil {
+		r.l.Errorf("error when getting all foods by shop id, id: %d, err: %s", id, err)
 		return result, err
 	}
 

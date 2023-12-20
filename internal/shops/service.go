@@ -2,6 +2,8 @@ package shops
 
 import (
 	"context"
+	"database/sql"
+	"strconv"
 
 	"github.com/sirupsen/logrus"
 )
@@ -13,7 +15,7 @@ type service struct {
 
 type IService interface {
 	GetAll(ctx context.Context, p getAllRepoParams) ([]Shop, error)
-	GetDetail(ctx context.Context, id int) (Shop, error)
+	GetDetail(ctx context.Context, id int) (ShopDetail, error)
 	Create(ctx context.Context, f Shop) (Shop, error)
 	Update(ctx context.Context, f Shop, id int) (Shop, error)
 	Delete(ctx context.Context, id int) (Shop, error)
@@ -37,13 +39,35 @@ func (s *service) GetAll(ctx context.Context, p getAllRepoParams) ([]Shop, error
 	return result, nil
 }
 
-func (s *service) GetDetail(ctx context.Context, id int) (Shop, error) {
-	var result Shop
-	result, err := s.r.GetDetail(ctx, id)
+func (s *service) GetDetail(ctx context.Context, id int) (ShopDetail, error) {
+	var result ShopDetail
+	shop, err := s.r.GetDetail(ctx, id)
 	if err != nil {
 		s.l.Errorf("error when getting detail id: %d, err: %s", id, err)
 		return result, err
 	}
+
+	result.GmapsLink = shop.GmapsLink
+	result.Id = shop.Id
+	result.Image = shop.Image
+	result.Location = shop.Location
+	result.Name = shop.Name
+	result.Latitude = shop.Latitude
+	result.Longitude = shop.Longitude
+
+	// convert id to string
+	idstring := strconv.Itoa(id)
+
+	foods, err := s.r.GetFoodsByShopId(ctx, idstring)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return result, nil
+		}
+		s.l.Errorf("error when getting foods by shop id: %d, err: %s", id, err)
+		return result, err
+	}
+
+	result.Foods = foods
 
 	return result, nil
 }
