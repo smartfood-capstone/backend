@@ -159,7 +159,7 @@ func (r *repository) Delete(ctx context.Context, id int) (Shop, error) {
 func (r *repository) GetFoodsByShopId(ctx context.Context, id string) ([]FoodShop, error) {
 	result := make([]FoodShop, 0)
 	query := `
-	SELECT f.id, f.name, fs.price FROM foods f
+	SELECT f.id, fs.name, fs.price FROM foods f
 	INNER JOIN shop_foods fs ON f.id = fs.food_id
 	WHERE fs.shop_id = $1
 	`
