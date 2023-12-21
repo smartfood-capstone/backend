@@ -1,0 +1,260 @@
+{
+	"info": {
+		"_postman_id": "155f20c4-35dc-482a-bb40-460249cfc3fb",
+		"name": "Capstone",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16414005"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "v1",
+					"item": [
+						{
+							"name": "foods",
+							"item": [
+								{
+									"name": "Get All",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{host-prod}}/foods",
+											"host": [
+												"{{host-prod}}"
+											],
+											"path": [
+												"foods"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{host-prod}}/foods/1",
+											"host": [
+												"{{host-prod}}"
+											],
+											"path": [
+												"foods",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"bagi kopi\",\n    \"description\": \"cafe 24 jam cuyz\",\n    \"image\": \"https://assets-pergikuliner.com/qNhOKXBl0wlIQnTUpBj48BL2blw=/945x0/smart/filters:watermark(https://assets-pergikuliner.com/assets/pegimakan-logo-3e147c56e232f471596371920946ae65.png,-0,-3,10):no_upscale()/https://assets-pergikuliner.com/uploads/image/picture/3019437/picture-1692872448.jpg\",\n    \"category\": \"food\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host-prod}}/foods",
+											"host": [
+												"{{host-prod}}"
+											],
+											"path": [
+												"foods"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"image\": \"https://asset.kompas.com/crops/vUZPiu1jdMWMpNszwzsi8RmSeKE=/1x0:2693x1795/750x500/data/photo/2022/04/01/624729f498ad4.jpg\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host-prod}}/foods/3",
+											"host": [
+												"{{host-prod}}"
+											],
+											"path": [
+												"foods",
+												"3"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host}}/foods/5",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"foods",
+												"5"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "shops",
+							"item": [
+								{
+									"name": "Get All",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{host}}/shops",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"shops"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{host}}/shops/1",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"shops",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"Unpar yagesya\",\n    \"location\": \"Jl. Ciumbuleuit No.94, Hegarmanah, Kec. Cidadap, Kota Bandung, Jawa Barat 40141\",\n    \"image\": \"https://assets-pergikuliner.com/qNhOKXBl0wlIQnTUpBj48BL2blw=/945x0/smart/filters:watermark(https://assets-pergikuliner.com/assets/pegimakan-logo-3e147c56e232f471596371920946ae65.png,-0,-3,10):no_upscale()/https://assets-pergikuliner.com/uploads/image/picture/3019437/picture-1692872448.jpg\",\n    \"gmaps_link\": \"https://maps.app.goo.gl/LX43iK5C322J9VPp9\",\n    \"latitude\": -6.874498144287712,\n    \"longitude\": 107.60567220785092\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host-prod}}/shops",
+											"host": [
+												"{{host-prod}}"
+											],
+											"path": [
+												"shops"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    // \"name\": \"Unpar ajah\"\n    // \"location\": \"Jl. Ciumbuleuit No.94, Hegarmanah, Kec. Cidadap, Kota Bandung, Jawa Barat 40141\",\n    \"image\": \"https://assets-pergikuliner.com/qNhOKXBl0wlIQnTUpBj48BL2blw=/945x0/smart/filters:watermark(https://assets-pergikuliner.com/assets/pegimakan-logo-3e147c56e232f471596371920946ae65.png,-0,-3,10):no_upscale()/https://assets-pergikuliner.com/uploads/image/picture/3019437/picture-1692872448.jpg\"\n    // \"gmaps_link\": \"https://maps.app.goo.gl/LX43iK5C322J9VPp9\",\n    // \"latitude\": -6.874498144287712,\n    // \"longitude\": 107.60567220785092\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host-prod}}/shops/3",
+											"host": [
+												"{{host-prod}}"
+											],
+											"path": [
+												"shops",
+												"3"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host}}/shops/5",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"shops",
+												"5"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}
