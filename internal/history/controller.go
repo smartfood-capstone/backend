@@ -31,7 +31,7 @@ func (c *controller) GetUserHistory(ctx echo.Context) error {
 	qlimit := ctx.QueryParam("limit")
 	limit, err := strconv.Atoi(qlimit)
 	if err != nil {
-		limit = 10
+		limit = 25
 	}
 
 	qpage := ctx.QueryParam("page")

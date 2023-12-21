@@ -101,7 +101,7 @@ func (c *controller) GetAll(ctx echo.Context) error {
 	qlimit := ctx.QueryParam("limit")
 	limit, err := strconv.Atoi(qlimit)
 	if err != nil {
-		limit = 10
+		limit = 100
 	}
 
 	qpage := ctx.QueryParam("page")
